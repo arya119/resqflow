@@ -1,0 +1,6 @@
+{
+    "python.defaultInterpreterPath": "/Users/aryakumar/Downloads/ResQflow/resqflow/backend/venv/bin/python3",
+    "python.analysis.extraPaths": [
+        "/Users/aryakumar/Downloads/ResQflow/resqflow/backend"
+    ]
+}
