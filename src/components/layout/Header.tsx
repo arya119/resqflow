@@ -24,6 +24,7 @@ const PAGE_TITLES: Record<string, { title: string; subtitle: string }> = {
 export function Header({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void }) {
   const pathname = usePathname();
   const {
+    openDisruptionModal,
     openBroadcastModal,
     toggleNotificationCenter,
     openSearchPalette,
@@ -71,6 +72,21 @@ export function Header({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
 
       {/* Right Area: Broadcast Alert, Theme Toggle, Search, Disruption, Notifications */}
       <div className="flex items-center gap-1.5 sm:gap-2">
+        {/* Scenario Simulation Trigger */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            openDisruptionModal();
+          }}
+          suppressHydrationWarning
+          className="bg-primary/15 hover:bg-primary text-primary hover:text-on-primary border border-primary/30 font-mono text-[11px] font-bold px-2.5 sm:px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
+          title="Simulate disaster disruption & compute autonomous bypass route"
+        >
+          <span className="material-symbols-outlined text-[16px]">play_circle</span>
+          <span className="whitespace-nowrap">Scenario Simulation</span>
+        </button>
+
         {/* High-Visibility Emergency Broadcast Alert Button */}
         <button
           onClick={openBroadcastModal}

@@ -12,6 +12,7 @@ import { MonitoringBanner } from '@/components/dashboard/MonitoringBanner';
 import { AllStatesPreviewModal } from '@/components/dashboard/AllStatesPreviewModal';
 import { RouteCorridorModal } from '@/components/dashboard/RouteCorridorModal';
 import { ReportIncidentModal } from '@/components/incidents/ReportIncidentModal';
+import { SimulationScenarioModal } from '@/components/dashboard/SimulationScenarioModal';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -54,6 +55,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 
         {/* Route Corridor Inspector Modal */}
         <RouteCorridorModal />
+
+        {/* Disaster Scenario & Autonomous Rerouting Engine Modal */}
+        <SimulationScenarioModal />
       </div>
     </ThemeProvider>
   );
