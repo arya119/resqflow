@@ -184,7 +184,6 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
   closeBroadcastModal: () => set({ isBroadcastModalOpen: false }),
 
   sendBroadcast: (alertData) => {
-    const loc = get().currentLocation;
     const newBroadcast: BroadcastAlert = {
       ...alertData,
       id: `BC-${Date.now().toString().slice(-6)}`,

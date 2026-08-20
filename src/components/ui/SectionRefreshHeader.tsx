@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import clsx from 'clsx';
 import { audioAlert } from '@/lib/audioAlert';
 
@@ -31,16 +31,7 @@ export function SectionRefreshHeader({
     return () => clearInterval(interval);
   }, [lastSynced]);
 
-  // Auto-refresh interval
-  useEffect(() => {
-    if (!autoRefresh) return;
-    const interval = setInterval(async () => {
-      handleManualRefresh(true);
-    }, autoRefreshSeconds * 1000);
-    return () => clearInterval(interval);
-  }, [autoRefresh, autoRefreshSeconds]);
-
-  const handleManualRefresh = async (isSilent = false) => {
+  const handleManualRefresh = useCallback(async (isSilent = false) => {
     if (isRefreshing) return;
     setIsRefreshing(true);
     if (!isSilent) {
@@ -54,7 +45,16 @@ export function SectionRefreshHeader({
         setIsRefreshing(false);
       }, 500);
     }
-  };
+  }, [isRefreshing, onRefresh]);
+
+  // Auto-refresh interval
+  useEffect(() => {
+    if (!autoRefresh) return;
+    const interval = setInterval(async () => {
+      handleManualRefresh(true);
+    }, autoRefreshSeconds * 1000);
+    return () => clearInterval(interval);
+  }, [autoRefresh, autoRefreshSeconds, handleManualRefresh]);
 
   return (
     <div className="bg-surface border border-outline-variant rounded-xl p-3 sm:p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs font-mono text-xs mb-4">

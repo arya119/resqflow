@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   MapContainer,
   TileLayer,
@@ -50,7 +50,6 @@ function MapAutoScanController() {
     activeHospitals,
     activeWarehouses,
     activeVehicles,
-    activeRoads,
     activeZones,
     setScanTarget,
     currentLocation,

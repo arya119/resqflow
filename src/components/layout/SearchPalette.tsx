@@ -25,7 +25,8 @@ export function SearchPalette() {
     if (isSearchPaletteOpen) {
       setTimeout(() => inputRef.current?.focus(), 50);
     } else {
-      setQuery('');
+      const t = setTimeout(() => setQuery(''), 0);
+      return () => clearTimeout(t);
     }
   }, [isSearchPaletteOpen]);
 

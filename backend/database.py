@@ -5,14 +5,16 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./resqflow.db")
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-connect_args = {"check_same_thread": False} if DATABASE_URL and "sqlite" in DATABASE_URL else {}
+connect_args = {"check_same_thread": False} if "sqlite" in DATABASE_URL else {}
 
 engine = create_engine(
     DATABASE_URL,
     connect_args=connect_args,
-    echo=True
+    echo=False
 )
 
 SessionLocal = sessionmaker(
